@@ -189,6 +189,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllTableController.cs" />
     <Compile Include="Controllers\CompetitionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -328,6 +329,7 @@
     <Content Include="Views\Participations\Details.cshtml" />
     <Content Include="Views\Participations\Edit.cshtml" />
     <Content Include="Views\Participations\Index.cshtml" />
+    <Content Include="Views\AllTable\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
