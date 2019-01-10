@@ -1,0 +1,61 @@
+﻿@model IEnumerable<sport.Models.Competition>
+
+@{
+    ViewBag.Title = "Соревнования";
+}
+
+@using (Html.BeginForm("Index", "Competition", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="query">
+                <input type="text" name="search" class="form-control" />
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Найти" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br>
+<p>
+    @Html.ActionLink("Создать новую запись", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Дата соревнования
+        </th>
+        <th>
+            Кол-во участников
+        </th>
+        <th>
+            Ранг соревнования
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_competition)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.number_participants)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.rank)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.сompetition_ID }) |
+                @Html.ActionLink("Подробно", "Details", new { id = item.сompetition_ID }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.сompetition_ID })
+            </td>
+        </tr>
+    }
+
+</table>

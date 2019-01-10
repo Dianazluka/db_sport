@@ -1,0 +1,50 @@
+﻿@model sport.Models.Participation
+
+@{
+    ViewBag.Title = "Подробно";
+}
+
+
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Результат
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.result)
+        </dd>
+
+        <dt>
+           Место
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.place)
+        </dd>
+
+        <dt>
+           Номер соревнования
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Competition.number_participants)
+        </dd>
+
+        <dt>
+            ФИО
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sportsman.surname)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить запись", "Edit", new { id = Model.participation_ID }) |
+    @Html.ActionLink("Вернуться к записям", "Index")
+</p>

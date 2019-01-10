@@ -1,0 +1,73 @@
+﻿@model IEnumerable<sport.Models.Section>
+
+@{
+    ViewBag.Title = "Секции";
+}
+
+@using (Html.BeginForm("Index", "Section", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="query">
+                <input type="text" name="search" class="form-control" />
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Найти" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Создать новую запись", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Название секции
+        </th>
+        <th>
+            Число членов
+        </th>
+        <th>
+            Место занятий
+        </th>
+        <th>
+            Особености приема
+        </th>
+        <th>
+            Оплата
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.section_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.membership)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.place_employment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.reception_features)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.payment)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.section_ID }) |
+                @Html.ActionLink("Подробно", "Details", new { id = item.section_ID }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.section_ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,64 @@
+﻿@model sport.Models.Section
+
+@{
+    ViewBag.Title = "Удалить";
+}
+
+
+
+<h3>Вы уверены, что хотите удалить запись?</h3>
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Название секции
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.section_name)
+        </dd>
+
+        <dt>
+            Число членов
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.membership)
+        </dd>
+
+        <dt>
+            Место занятий
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.place_employment)
+        </dd>
+
+        <dt>
+            Особености приема
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reception_features)
+        </dd>
+
+        <dt>
+            Оплата
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Удалить" class="btn btn-default" /> |
+            @Html.ActionLink("Вернуться к записям", "Index")
+        </div>
+    }
+</div>

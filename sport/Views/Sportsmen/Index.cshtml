@@ -1,0 +1,91 @@
+﻿@model IEnumerable<sport.Models.Sportsman>
+
+@{
+    ViewBag.Title = "Спортсмен";
+}
+
+@using (Html.BeginForm("Index", "Sportsman", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-10">
+            <label for="query">
+                <input type="text" name="search" class="form-control" />
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-10">
+            <input type="submit" value="Найти" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<p>
+    @Html.ActionLink("Создать новую запись", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            ФИО
+        </th>
+        <th>
+            Возраст
+        </th>
+        <th>
+            Адрес
+        </th>
+        <th>
+            Телефон
+        </th>
+        <th>
+            Рост
+        </th>
+        <th>
+            Вес
+        </th>
+        <th>
+            Достижение
+        </th>
+        <th>
+            Название секции
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.growth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.achievement)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Section.section_name)
+            </td>
+            <td>
+                @Html.ActionLink("Изменить", "Edit", new { id = item.sportsman_ID }) |
+                @Html.ActionLink("Подробно", "Details", new { id = item.sportsman_ID }) |
+                @Html.ActionLink("Удалить", "Delete", new { id = item.sportsman_ID })
+            </td>
+        </tr>
+    }
+
+</table>

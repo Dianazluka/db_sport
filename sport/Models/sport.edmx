@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище sportModel" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="сompetition_ID" />
+          </Key>
+          <Property Name="сompetition_ID" Type="int" Nullable="false" />
+          <Property Name="date_competition" Type="datetime" Nullable="false" />
+          <Property Name="number_participants" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="rank" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participation">
+          <Key>
+            <PropertyRef Name="participation_ID" />
+          </Key>
+          <Property Name="participation_ID" Type="int" Nullable="false" />
+          <Property Name="p_sportsman_ID" Type="int" Nullable="false" />
+          <Property Name="p_сompetition_ID" Type="int" Nullable="false" />
+          <Property Name="result" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="place" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="section_ID" />
+          </Key>
+          <Property Name="section_ID" Type="int" Nullable="false" />
+          <Property Name="section_name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="membership" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="place_employment" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="reception_features" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="payment" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sportsman">
+          <Key>
+            <PropertyRef Name="sportsman_ID" />
+          </Key>
+          <Property Name="sportsman_ID" Type="int" Nullable="false" />
+          <Property Name="s_section_ID" Type="int" Nullable="false" />
+          <Property Name="surname" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="growth" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="weight" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="achievement" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Participation_Competition">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="сompetition_ID" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="p_сompetition_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participation_Sportsman">
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sportsman">
+              <PropertyRef Name="sportsman_ID" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="p_sportsman_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sportsman_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="section_ID" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="s_section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище sportModelContainer">
+          <EntitySet Name="Competition" EntityType="Self.Competition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participation" EntityType="Self.Participation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sportsman" EntityType="Self.Sportsman" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Participation_Competition" Association="Self.FK_Participation_Competition">
+            <End Role="Competition" EntitySet="Competition" />
+            <End Role="Participation" EntitySet="Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participation_Sportsman" Association="Self.FK_Participation_Sportsman">
+            <End Role="Sportsman" EntitySet="Sportsman" />
+            <End Role="Participation" EntitySet="Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sportsman_Section" Association="Self.FK_Sportsman_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Sportsman" EntitySet="Sportsman" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sportModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Competition">
+          <Key>
+            <PropertyRef Name="сompetition_ID" />
+          </Key>
+          <Property Name="сompetition_ID" Type="Int32" Nullable="false" />
+          <Property Name="date_competition" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="number_participants" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rank" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Participations" Relationship="Self.FK_Participation_Competition" FromRole="Competition" ToRole="Participation" />
+        </EntityType>
+        <EntityType Name="Participation">
+          <Key>
+            <PropertyRef Name="participation_ID" />
+          </Key>
+          <Property Name="participation_ID" Type="Int32" Nullable="false" />
+          <Property Name="p_sportsman_ID" Type="Int32" Nullable="false" />
+          <Property Name="p_сompetition_ID" Type="Int32" Nullable="false" />
+          <Property Name="result" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="place" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Competition" Relationship="Self.FK_Participation_Competition" FromRole="Participation" ToRole="Competition" />
+          <NavigationProperty Name="Sportsman" Relationship="Self.FK_Participation_Sportsman" FromRole="Participation" ToRole="Sportsman" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="section_ID" />
+          </Key>
+          <Property Name="section_ID" Type="Int32" Nullable="false" />
+          <Property Name="section_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="membership" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="place_employment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="reception_features" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="payment" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Sportsmen" Relationship="Self.FK_Sportsman_Section" FromRole="Section" ToRole="Sportsman" />
+        </EntityType>
+        <EntityType Name="Sportsman">
+          <Key>
+            <PropertyRef Name="sportsman_ID" />
+          </Key>
+          <Property Name="sportsman_ID" Type="Int32" Nullable="false" />
+          <Property Name="s_section_ID" Type="Int32" Nullable="false" />
+          <Property Name="surname" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="growth" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="weight" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="achievement" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Participations" Relationship="Self.FK_Participation_Sportsman" FromRole="Sportsman" ToRole="Participation" />
+          <NavigationProperty Name="Section" Relationship="Self.FK_Sportsman_Section" FromRole="Sportsman" ToRole="Section" />
+        </EntityType>
+        <Association Name="FK_Participation_Competition">
+          <End Role="Competition" Type="Self.Competition" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Competition">
+              <PropertyRef Name="сompetition_ID" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="p_сompetition_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Participation_Sportsman">
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sportsman">
+              <PropertyRef Name="sportsman_ID" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="p_sportsman_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sportsman_Section">
+          <End Role="Section" Type="Self.Section" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sportsman" Type="Self.Sportsman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="section_ID" />
+            </Principal>
+            <Dependent Role="Sportsman">
+              <PropertyRef Name="s_section_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sportEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Competitions" EntityType="Self.Competition" />
+          <EntitySet Name="Participations" EntityType="Self.Participation" />
+          <EntitySet Name="Sections" EntityType="Self.Section" />
+          <EntitySet Name="Sportsmen" EntityType="Self.Sportsman" />
+          <AssociationSet Name="FK_Participation_Competition" Association="Self.FK_Participation_Competition">
+            <End Role="Competition" EntitySet="Competitions" />
+            <End Role="Participation" EntitySet="Participations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Participation_Sportsman" Association="Self.FK_Participation_Sportsman">
+            <End Role="Sportsman" EntitySet="Sportsmen" />
+            <End Role="Participation" EntitySet="Participations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sportsman_Section" Association="Self.FK_Sportsman_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Sportsman" EntitySet="Sportsmen" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище sportModelContainer" CdmEntityContainer="sportEntities">
+          <EntitySetMapping Name="Competitions">
+            <EntityTypeMapping TypeName="sportModel.Competition">
+              <MappingFragment StoreEntitySet="Competition">
+                <ScalarProperty Name="сompetition_ID" ColumnName="сompetition_ID" />
+                <ScalarProperty Name="date_competition" ColumnName="date_competition" />
+                <ScalarProperty Name="number_participants" ColumnName="number_participants" />
+                <ScalarProperty Name="rank" ColumnName="rank" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participations">
+            <EntityTypeMapping TypeName="sportModel.Participation">
+              <MappingFragment StoreEntitySet="Participation">
+                <ScalarProperty Name="participation_ID" ColumnName="participation_ID" />
+                <ScalarProperty Name="p_sportsman_ID" ColumnName="p_sportsman_ID" />
+                <ScalarProperty Name="p_сompetition_ID" ColumnName="p_сompetition_ID" />
+                <ScalarProperty Name="result" ColumnName="result" />
+                <ScalarProperty Name="place" ColumnName="place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="sportModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="section_ID" ColumnName="section_ID" />
+                <ScalarProperty Name="section_name" ColumnName="section_name" />
+                <ScalarProperty Name="membership" ColumnName="membership" />
+                <ScalarProperty Name="place_employment" ColumnName="place_employment" />
+                <ScalarProperty Name="reception_features" ColumnName="reception_features" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sportsmen">
+            <EntityTypeMapping TypeName="sportModel.Sportsman">
+              <MappingFragment StoreEntitySet="Sportsman">
+                <ScalarProperty Name="sportsman_ID" ColumnName="sportsman_ID" />
+                <ScalarProperty Name="s_section_ID" ColumnName="s_section_ID" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="growth" ColumnName="growth" />
+                <ScalarProperty Name="weight" ColumnName="weight" />
+                <ScalarProperty Name="achievement" ColumnName="achievement" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

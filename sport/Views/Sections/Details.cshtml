@@ -1,0 +1,58 @@
+﻿@model sport.Models.Section
+
+@{
+    ViewBag.Title = "Подробно";
+}
+
+
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Название секции
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.section_name)
+        </dd>
+
+        <dt>
+            Число членов
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.membership)
+        </dd>
+
+        <dt>
+            Место занятий
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.place_employment)
+        </dd>
+
+        <dt>
+            Особености приема
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reception_features)
+        </dd>
+
+        <dt>
+           Оплата
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Изменить запись", "Edit", new { id = Model.section_ID }) |
+    @Html.ActionLink("Вернуться к записям", "Index")
+</p>
