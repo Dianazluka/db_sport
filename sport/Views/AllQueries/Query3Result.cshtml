@@ -1,0 +1,41 @@
+﻿@model IEnumerable<sport.Classes.Query3Data>
+@{
+    ViewBag.Title = "Результаты запроса";
+}
+<h2>@ViewBag.Title</h2>
+<table class="table table-bordered table-hover">
+    <tr>
+        <th>
+            Название секции
+        </th>
+        <th>
+            Фамилия спортсмена
+        </th>
+        <th>
+            Возраст
+        </th>
+        <th>
+            Дата соревнования
+        </th>
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.section_name
+            </td>
+            <td>
+                @item.surname
+            </td>
+            <td>
+                @item.age
+
+            </td>
+            <td>
+                @item.data_competition
+            </td>
+
+        </tr>
+    }
+</table>

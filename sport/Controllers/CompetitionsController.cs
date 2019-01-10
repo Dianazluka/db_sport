@@ -10,16 +10,29 @@ using sport.Models;
 
 namespace sport.Controllers
 {
+    [Authorize]
     public class CompetitionsController : Controller
     {
         private sportEntities db = new sportEntities();
-
+        [AllowAnonymous]
         // GET: Competitions
         public ActionResult Index()
         {
             return View(db.Competitions.ToList());
         }
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [AllowAnonymous]
+        public ActionResult Index(string search)
+        {
+            var result = db.Competitions
+                 .Where(c => c.date_competition.ToString().Contains(search.ToLower())
+                || c.number_participants.ToString().Contains(search.ToLower())
+                || c.rank.ToString().Contains(search.ToLower()))
+                .ToList();
+            return View(result);
+        }
+        [AllowAnonymous]
         // GET: Competitions/Details/5
         public ActionResult Details(int? id)
         {
@@ -34,7 +47,7 @@ namespace sport.Controllers
             }
             return View(competition);
         }
-
+        [AllowAnonymous]
         // GET: Competitions/Create
         public ActionResult Create()
         {
@@ -45,6 +58,7 @@ namespace sport.Controllers
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "сompetition_ID,date_competition,number_participants,rank")] Competition competition)
         {
@@ -57,7 +71,7 @@ namespace sport.Controllers
 
             return View(competition);
         }
-
+        [AllowAnonymous]
         // GET: Competitions/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -72,7 +86,7 @@ namespace sport.Controllers
             }
             return View(competition);
         }
-
+        [AllowAnonymous]
         // POST: Competitions/Edit/5
         // Чтобы защититься от атак чрезмерной передачи данных, включите определенные свойства, для которых следует установить привязку. Дополнительные 
         // сведения см. в статье https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -88,7 +102,7 @@ namespace sport.Controllers
             }
             return View(competition);
         }
-
+        [AllowAnonymous]
         // GET: Competitions/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -103,6 +117,7 @@ namespace sport.Controllers
             }
             return View(competition);
         }
+        [AllowAnonymous]
 
         // POST: Competitions/Delete/5
         [HttpPost, ActionName("Delete")]

@@ -188,7 +188,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Classes\Query1Data.cs" />
+    <Compile Include="Classes\Query2Data.cs" />
+    <Compile Include="Classes\Query3Data.cs" />
+    <Compile Include="Classes\Query4Data.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AllQueriesController.cs" />
     <Compile Include="Controllers\AllTableController.cs" />
     <Compile Include="Controllers\CompetitionsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -330,6 +335,11 @@
     <Content Include="Views\Participations\Edit.cshtml" />
     <Content Include="Views\Participations\Index.cshtml" />
     <Content Include="Views\AllTable\Index.cshtml" />
+    <Content Include="Views\AllQueries\Index.cshtml" />
+    <Content Include="Views\AllQueries\Query1Result.cshtml" />
+    <Content Include="Views\AllQueries\Query2Result.cshtml" />
+    <Content Include="Views\AllQueries\Query3Result.cshtml" />
+    <Content Include="Views\AllQueries\Query4Result.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
